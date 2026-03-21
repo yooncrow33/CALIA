@@ -1,6 +1,6 @@
 package com.calia.object;
 
-import com.calia.CaliaBase;
+import com.calia.internal.base.TopDownBase;
 
 import java.awt.*;
 
@@ -122,7 +122,7 @@ public abstract class Entity {
     public void addX(double value) { x += value;}
     public void addY(double value) { y += value;}
 
-    public void checkBound(CaliaBase ssBase) {
+    public void checkBound(TopDownBase ssBase) {
         if (x > ssBase.MAX_X) {
             x = ssBase.MAX_X;
         } else if (x < ssBase.MIN_X) {

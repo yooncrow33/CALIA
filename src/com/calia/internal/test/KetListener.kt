@@ -6,7 +6,7 @@ import java.awt.KeyboardFocusManager
 import java.awt.event.KeyEvent
 import javax.swing.JComponent
 
-class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
+/*class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
 
     override fun onKeyWPress() {
         main.player.setTrueMoveUp()
@@ -41,3 +41,5 @@ class KetListener(comp: JComponent, var main: Main) : KeyBindingBase(comp) {
     }
 
 }
+
+ */

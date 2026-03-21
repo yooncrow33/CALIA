@@ -1,11 +1,11 @@
 package com.calia.internal.test
 
-import com.calia.CaliaBase
+/*import com.calia.internal.base.TopDownBase
 import com.calia.internal.`object`.viewMetrics.IMouse
 import java.awt.Graphics
 
 
-class Main(profileId : Int) : CaliaBase("physics test",19200,10800), IMouse {
+class Main(profileId : Int) : TopDownBase("physics test",19200,10800), IMouse {
 
     var gamePause = false
 
@@ -60,4 +60,6 @@ fun main() {
 }
 //어떻게 작동하는지는 모른다..
 //어쩄든 기적적으로 작동한다.
+
+ */
 

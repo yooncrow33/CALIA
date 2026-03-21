@@ -6,7 +6,7 @@ import java.awt.Color
 import java.awt.Graphics
 
 
-class Player(val main: Main) : Entity(0.0,0.0, EntityConfig(
+/*class Player(val main: Main) : Entity(0.0,0.0, EntityConfig(
     15,  // radius (반지름 15)
     true,  // isCollisionEnabled (충돌 활성화)
     true,  // isUpdateEnabled (업데이트 활성화)
@@ -91,3 +91,6 @@ class Player(val main: Main) : Entity(0.0,0.0, EntityConfig(
     fun setFalseMoveLeft() { moveLeft = false }
     fun setFalseMoveDown() { moveDown = false }
     fun setFalseMoveRight() { moveRight = false }}
+
+
+ */

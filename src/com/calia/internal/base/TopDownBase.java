@@ -1,5 +1,6 @@
-package com.calia;
+package com.calia.internal.base;
 
+import com.calia.GameComponent;
 import com.calia.object.Camera;
 import com.calia.object.Entity;
 
@@ -7,11 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public abstract class CaliaBase extends CoreBase {
+public class TopDownBase extends CoreBase {
     final int WORLD_WIDTH;
     final int WORLD_HEIGHT;
 
-    public CaliaBase(String title, int worldWidth, int worldHeight) {
+    public TopDownBase(CALIA Calia,String title, int worldWidth, int worldHeight) {
         super(title);
         this.WORLD_WIDTH = worldWidth;
         this.WORLD_HEIGHT = worldHeight;
@@ -38,36 +39,38 @@ public abstract class CaliaBase extends CoreBase {
     public final double MIN_Y;
     public final double MAX_Y;
 
-    protected abstract void update(double deltaTime);
-    protected abstract void init();
-    protected void clickEvent() {}
     protected final void exit() { internalExit(); }
 
-    private boolean isEntitiesNeedSort = false;
-    private ArrayList<Entity> entities = new ArrayList<>();
+    boolean isEntitiesNeedSort = false;
+    ArrayList<Entity> entities = new ArrayList<>();
 
     private final Camera camera = new Camera();
 
-    private boolean hitBoxRender = false;
+    boolean hitBoxRender = false;
     private boolean pause = false;
-    private boolean launch = false;
 
-    protected void addEntity(Entity e) {
-        entities.add(e);
-        isEntitiesNeedSort = true;
+    GameComponent component = null;
+
+    void registerComponent(GameComponent gameComponent) {
+        if (this.component != null) return;
+        component = gameComponent;
+        launch();
     }
 
     @Override
-    protected final void internalInit() {
-        init();
+    protected void internalInit() {
+        if (component != null) {
+            component.init();
+        }
     }
 
     @Override
     protected final void internalUpdate(double dt) {
-        if (!launch) return;
         if (pause) return;
-        update(dt);
         //internal update
+        if (component != null) {
+            component.update(dt);
+        }
         for (int i = entities.size() - 1; i >= 0; i--) {
             Entity e = entities.get(i);
             e.update(dt);
@@ -97,17 +100,17 @@ public abstract class CaliaBase extends CoreBase {
     /**
      * Renders the background elements behind entities.
      */
-    protected void backGroundRender(Graphics g) {}
 
     /**
      * Renders at the top-most layer, just below the HUD.
      */
-    protected void render(Graphics g) {}
+    //이제 없음
 
     @Override
     protected final void internalRender(Graphics g) {
-        if (!launch) return;
-        backGroundRender(g);
+        if (component != null) {
+            component.renderBackGround(g);
+        } else {return;}
         for (int i = entities.size() - 1; i >= 0; i--) {
             Entity e = entities.get(i);
             double relativeX = e.getX() - camera.getX();
@@ -124,15 +127,8 @@ public abstract class CaliaBase extends CoreBase {
                 }
             }
         }
-        render(g);
+        component.renderHud(g);
     }
-
-    @Override
-    protected void internalClick() {
-        clickEvent();
-    }
-
-    protected final void launch() {launch = true;}
 
     public void resolveCollision(Entity a, Entity b) {
         double dx = b.getX() - a.getX();

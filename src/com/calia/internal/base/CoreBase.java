@@ -1,4 +1,4 @@
-package com.calia;
+package com.calia.internal.base;
 
 import com.calia.internal.object.viewMetrics.IFrameSize;
 import com.calia.internal.object.viewMetrics.ViewMetrics;
@@ -32,7 +32,6 @@ abstract class CoreBase extends JPanel implements IFrameSize {
         ViewMetrics = new ViewMetrics(this);
 
         frame.add(this);
-        frame.setVisible(true);
         frame.setFocusable(false);
 
         this.setFocusable(true);
@@ -82,7 +81,9 @@ abstract class CoreBase extends JPanel implements IFrameSize {
         });
 
         ViewMetrics.calculateViewMetrics();
+    }
 
+    protected void launch() {
         SwingUtilities.invokeLater(() -> {
             // 모든 UI 이벤트 처리 후 (가장 안정적일 때)
             this.setFocusable(true);
@@ -94,6 +95,8 @@ abstract class CoreBase extends JPanel implements IFrameSize {
             internalInit();
 
             startGameLoop();
+
+            frame.setVisible(true);
         });
     }
 

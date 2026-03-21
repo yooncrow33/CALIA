@@ -1,11 +1,11 @@
 package com.calia.internal.test;
 
-import com.calia.internal.test.Main;
+//import com.calia.internal.test.Main;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MouseListener extends MouseAdapter {
+/*public class MouseListener extends MouseAdapter {
 
     Main main;
 
@@ -18,3 +18,5 @@ public class MouseListener extends MouseAdapter {
 
     }
 }
+
+ */
